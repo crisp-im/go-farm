@@ -49,7 +49,6 @@ func Hash32(s []byte) uint32 {
 	g = rotate32(g, 19)
 	g = g*5 + 0xe6546b64
 	f += a4
-
 	f = rotate32(f, 19) + 113
 	iters := (slen - 1) / 20
 	for {
@@ -67,6 +66,10 @@ func Hash32(s []byte) uint32 {
 		f += g
 		g += f
 		s = s[20:]
+		iters--
+		if iters == 0 {
+			break
+		}
 	}
 	g = rotate32(g, 11) * c1
 	g = rotate32(g, 17) * c1
